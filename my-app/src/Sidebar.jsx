@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./App.css";
 import data from "./data/data.json";
 
@@ -10,7 +10,22 @@ const Sidebar = ( { allergicIngredients, setAllergicIngredients} ) => {
 
   const [query, setQuery] = useState("");
   const [filtered, setFiltered] = useState([]);
-  const [selected, setSelected] = useState([]); // store multiple selections
+  // const [selected, setSelected] = useState([]); // store multiple selections
+
+  const [selected, setSelected] = useState(() => {
+    const stored = localStorage.getItem("selectedAllergicNames");
+    return stored ? JSON.parse(stored) : [];
+  });
+
+
+  useEffect(() => {
+    localStorage.setItem("selectedAllergicNames", JSON.stringify(selected));
+  }, [selected]);
+
+  useEffect(() => {
+    localStorage.setItem("allergicIngredientIds", JSON.stringify(allergicIngredients));
+  }, [allergicIngredients]);
+
 
   const handleChange = (e) => {
     const value = e.target.value;
@@ -134,34 +149,3 @@ const Sidebar = ( { allergicIngredients, setAllergicIngredients} ) => {
 };
 
 export default Sidebar;
-
-
-// import React, { useState } from "react";
-// import "./App.css";
-// import data from "./data/data.json"; // your JSON file
-
-// const Sidebar = ({ ingredients, selected, toggleIngredient }) => {
-//   return (
-//     <div className="w-64 p-4 bg-gray-100 rounded-lg shadow-md">
-//       <h2 className="text-lg font-semibold mb-4">ส่วนผสม</h2>
-//       <div>
-//         {ingredients.map((ing) => (
-//           <label
-//             key={ing.id}
-//             className="flex items-center space-x-2 cursor-pointer mb-2"
-//           >
-//             <input
-//               type="checkbox"
-//               checked={selected.includes(ing.id)}
-//               onChange={() => toggleIngredient(ing.id)}
-//               className="cursor-pointer"
-//             />
-//             <span>{ing.name}</span>
-//           </label>
-//         ))}
-//       </div>
-//     </div>
-//   );
-// };
-
-// export default Sidebar;
