@@ -11,13 +11,7 @@ import data from "./data/data.json";
 
 function App() {
   const [selectedCategoryId, setSelectedCategoryId] = useState(null);
-  // const [allergicIngredients, setAllergicIngredients] = useState([]);
-
-  const [allergicIngredients, setAllergicIngredients] = useState(() => {
-    const stored = localStorage.getItem("allergicIngredientIds");
-    return stored ? JSON.parse(stored) : [];
-  });
-
+  const [allergicIngredients, setAllergicIngredients] = useState([]);
 
   // all products from JSON
   const products = data.product;
