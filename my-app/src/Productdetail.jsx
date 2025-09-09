@@ -117,9 +117,6 @@ const ProductDetail = ({ products, ingredients, allergicIngredients }) => {
             <h2 className="text-3xl font-bold mb-2 mt-4 ml-10">{product.name}</h2>
             <p className="text-gray-600 mb-4 ml-10">SKU: {product.id}</p>
 
-            <div className="mb-4">
-              <span className="text-2xl font-bold mr-2 ml-10">$349.99</span>
-            </div>
             <a href={product.link} target="_blank" rel="noopener noreferrer">
               <img
                 src={watson_logo}
